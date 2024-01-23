@@ -16,14 +16,18 @@ def encrypt(message, key):
 
   encrypted_message = ""
   for letter in message:
-    # Get the position of the letter in the alphabet
-    letter_position = alphabet.find(letter)
-    # Apply the key
-    new_position = letter_position + key
-    # Get the new letter
-    new_letter = alphabet[new_position % len(alphabet)]
-    # Add the new letter to the encrypted message
-    encrypted_message += new_letter
+    #Check in letter in alphabet
+    if letter in alphabet:
+      # Get the position of the letter in the alphabet
+      letter_position = alphabet.find(letter)
+      # Apply the key (sum the key)
+      new_position = letter_position + key
+      # Get the new letter
+      new_letter = alphabet[new_position % len(alphabet)]
+      # Add the new letter to the encrypted message
+      encrypted_message += new_letter
+    else:
+      encrypted_message += letter
   return encrypted_message
 
 # Function to decrypt a message
@@ -41,29 +45,33 @@ def decrypt(message, key):
 
   decrypted_message = ""
   for letter in message:
-    # Get the position of the letter in the alphabet
-    letter_position = alphabet.find(letter)
-    # Apply the inverse key
-    new_position = letter_position - key
-    # Get the new letter
-    new_letter = alphabet[new_position % len(alphabet)]
-    # Add the new letter to the decrypted message
-    decrypted_message += new_letter
+    #Check in letter in alphabet
+    if letter in alphabet:
+      # Get the position of the letter in the alphabet
+      letter_position = alphabet.find(letter)
+      # Apply the inverse key
+      new_position = letter_position - key
+      # Get the new letter
+      new_letter = alphabet[new_position % len(alphabet)]
+      # Add the new letter to the decrypted message
+      decrypted_message += new_letter
+    else:
+      decrypted_message += letter
   return decrypted_message
 
 # Program options
 options = {
-  "encrypt": encrypt,
-  "decrypt": decrypt
+  "1": encrypt,
+  "2": decrypt
 }
 
 # Get the user's desired option
-option = input("What do you want to do? (encrypt/decrypt): ")
+option = input("What do you want to do?\n1. encrypt\n2. decrypt\nEnter option: ")
 
 # If the option is valid
 if option in options:
   # Get the message from the user
-  message = input("Enter the message: ")
+  message = input("Enter the message: ").lower()
 
   # Get the key from the user
   key = int(input("Enter the key: "))
